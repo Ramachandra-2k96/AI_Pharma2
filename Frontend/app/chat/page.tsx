@@ -7,6 +7,15 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Mic, Send, Image as ImageIcon, StopCircle, Volume2, VolumeX } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
+
+type SpeechRecognition = any;
+
 interface Message {
   id: number;
   content: string;
@@ -95,14 +104,14 @@ export default function Chat() {
       recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
 
-      recognitionRef.current.onresult = (event) => {
+      recognitionRef.current.onresult = (event: any) => {
         const transcript = Array.from(event.results)
-          .map((result) => result[0].transcript)
+          .map((result: any) => result[0].transcript)
           .join('');
         setInput(transcript);
       };
 
-      recognitionRef.current.onerror = (event) => {
+      recognitionRef.current.onerror = (event: any) => {
         console.error('Speech recognition error', event.error);
         stopSpeechToText();
       };
