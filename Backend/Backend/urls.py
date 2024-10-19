@@ -24,5 +24,5 @@ urlpatterns = [
     path('chat', TemplateView.as_view(template_name="chat.html")),
     path('signup', TemplateView.as_view(template_name="signup.html")),
     path('login', TemplateView.as_view(template_name="login.html")),
-    path('api',include('PharmaBot.urls')),
+    path('api/',include('PharmaBot.urls')),
 ]
